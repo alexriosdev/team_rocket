@@ -6,7 +6,7 @@ This repo contains the necessary files for the demo project due on February 9, 2
 <h3>Notes:</h3>
 For this particular demo only three files are needed:
 <ul style="list-style-type:none">
-	<li>demo_play</li>
+	<li>demo_play.py - (Main file) </li>
 	<li>background2.png - (This is only a mock-up!)</li>
   <li>player.png - (This is only a mock-up!)</li>
 </ul>
