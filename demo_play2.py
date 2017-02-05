@@ -43,16 +43,29 @@ y1 = -background_height
 # Determines how fast the background moves, in frames
 background_speed = 10
 
+# Sprite Position
+sprite_position_x = (background_width / 2) - (player_width / 2)    # Place sprite in the center of x-axis
+sprite_position_y = background_height - (player_height * 1.5)      # Place sprite a couple of pixels above the bottom border of the y-axis
+
+# Sprite Speed and Relative Distance
+sprite_pos_enemy = 0.2 
+sprite_pos_player = 1.5
+
+sprite_speed_enemy = 0.8
+sprite_speed_player = 1
+
+enemy = pygame.image.load('enemy.png')
+
 # Sprite Class
 class Sprite(object):  
-    def __init__(self):
-        self.image = player
+    def __init__(self, sprite_img, sprite_pos):
+        self.image = sprite_img
         # the sprite's position
-        self.x = (background_width / 2) - (player_width / 2)    # Place sprite in the center of x-axis
-        self.y = background_height - (player_height * 1.5)      # Place sprite a couple of pixels above the bottom border of the y-axis
+        self.x = sprite_position_x
+        self.y = background_height - (player_height * sprite_pos) 
         self.rect = player_rect
 
-    def movement_keys(self):
+    def movement_keys(self, sprite_speed):
         key = pygame.key.get_pressed()
         dist = 10 # Distance moved in frames
 
@@ -61,13 +74,13 @@ class Sprite(object):
             factor_x = 1.5
             factor_y = 1.5
             if key[pygame.K_DOWN]: # down key
-                self.y += dist * factor_y # move down
+                self.y += dist * factor_y * sprite_speed # move down
             elif key[pygame.K_UP]: # up key
-                self.y -= dist * factor_y # move up
+                self.y -= dist * factor_y * sprite_speed # move up
             if key[pygame.K_RIGHT]: # right key
-                self.x += dist * factor_x # move right
+                self.x += dist * factor_x * sprite_speed # move right
             elif key[pygame.K_LEFT]: # left key
-                self.x -= dist * factor_x# move left
+                self.x -= dist * factor_x * sprite_speed # move left
         # if ((self.x > 0) and (self.x < 192)) or ((self.x > 832) and (self.x < 1024))
 
         # else if sprite is not in the "pathway", moving speed is noticeable slower
@@ -124,7 +137,8 @@ def game_intro():
         pygame.display.update()
         Clock.tick(FPS)
 
-sprite1 = Sprite()
+sprite1 = Sprite(player, sprite_pos_player)
+sprite2 = Sprite(enemy, sprite_pos_enemy)
 
 # Game Loop
 def game_loop():
@@ -172,9 +186,12 @@ def game_loop():
         
         # screen.blit(player,(640,664)) # Display static sprite at specified coordinates
 
-        sprite1.movement_keys()
+        sprite1.movement_keys(sprite_speed_player)
         sprite1.draw(screen) # Draw the sprite into the screen
 
+        sprite2.movement_keys(sprite_speed_enemy)
+        sprite2.draw(screen) # Draw the sprite into the screen
+        
         pygame.display.flip()
         pygame.display.update()
 
