@@ -12,6 +12,7 @@ For this particular demo only three files are needed:
 
 <h4>Optional</h4> 
   - demo_play2.py - (Same as main file, just has the Start Screen added)
+  - enemy.png
 
 
 <h4>Progress:</h4> 
@@ -24,14 +25,17 @@ For this particular demo only three files are needed:
   - Player sprite is able to move with defined speed
   - Implementation of a Start Screen
     - Only on demo_play2.py
+  - Enemy sprite added
+    - Only on demo_play2.py
+  - Enemy sprite follows player like a shadow
     
 
     
 <h4>To do:</h4>
   - Calibrate sprite movement speed
   - Set boundaries for the sprite
-  - Set collision arguments for sprite
-  - Add enemy sprites
+  - Set collision arguments for sprites
+  - Add sprite obstacles
   - Get better looking sprites!
     
 
