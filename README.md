@@ -4,13 +4,18 @@
 This repo contains the necessary files for the demo project due on February 9, 2017 <br>
 
 <h3>Notes:</h3>
-For this particular demo only three files are needed:
+For this particular demo five files are needed:
+  - main.py - (Main file) 
+  - sprite1.py
+  - utils.py
+  - background_update.png  
+  - character.png
+  - enemy.png   
 
-  - demo_play.py - (Main file) 
-  - background2.png - (This is only a mock-up!)
-  - player.png - (This is only a mock-up!)
-
-<h4>Optional</h4> 
+<h4>Reference Files</h4>
+  - demo_play.py - (Old main file) 
+  - background2.png  
+  - player.png  
   - demo_play2.py - (Same as main file, just has the Start Screen added)
   - enemy.png
 
