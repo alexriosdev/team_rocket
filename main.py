@@ -92,16 +92,16 @@ def game_intro():
         message_to_screen("The objective of this game is to escape the law",white,-50)
         message_to_screen("Use A to move left, D to move right",white,0)
         message_to_screen("Use Spacebar to jump",white,50)
-        message_to_screen("Press C to begin, Q to quit",white,95.5)
+        message_to_screen("Press C to continue, Q to quit",white,95.5)
 
         pygame.display.update()
         Clock.tick(FPS)
 
 # Player(self, screen, image, x, y, vx, vy, y_len)
-list = [Pothole(screen, 195, 50, 0, 0),
-        Enemy( screen, "enemy.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
-        Player( screen, "character.png", sprite_position_x, sprite_position_y, 0, 1)
-       ]
+#list = [Pothole(screen, 195, 50, 0, 0),
+#        Enemy( screen, "enemy.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
+#        Player( screen, "character.png", sprite_position_x, sprite_position_y, 0, 1)
+#       ]
  
 
 # Game Loop
@@ -119,12 +119,18 @@ def game_loop():
 
     time = pygame.time.get_ticks()
 
+    # Player(self, screen, image, x, y, vx, vy, y_len)
+    list = [Pothole(screen, 195, 50, 0, 0),
+            Enemy( screen, "enemy.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
+            Player( screen, "character.png", sprite_position_x, sprite_position_y, 0, 1)
+           ]
+
     # while game has not been closed
     while not gameExit:
         # when player has been caught (work in progress)
         while gameOver == True:
             screen.fill(black)
-            message_to_screen("Game over, press Spacebar to play again or Escape key to quit", white,0)
+            message_to_screen("Game over, press C to play again or Escape key to quit", white,0)
             pygame.display.update()
 
             for event in pygame.event.get():
@@ -133,7 +139,7 @@ def game_loop():
                         gameExit = True
                         gameOver = False
 
-                    if event.key  == pygame.K_SPACE:
+                    if event.key  == pygame.K_c:
                         game_loop()
                         
         # Exit Game by pressing the Escape Key            
