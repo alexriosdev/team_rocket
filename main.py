@@ -98,8 +98,11 @@ def game_intro():
         Clock.tick(FPS)
 
 # Player(self, screen, image, x, y, vx, vy, y_len)
-list = [Player( screen, "character.png", sprite_position_x, sprite_position_y, 0, 1),
-        Enemy( screen, "enemy.png", sprite_position_x, enemy_sprite_position_y, 0, 1)]
+list = [Pothole(screen, 195, 50, 0, 0),
+        Enemy( screen, "enemy.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
+        Player( screen, "character.png", sprite_position_x, sprite_position_y, 0, 1)
+       ]
+ 
 
 # Game Loop
 def game_loop():
@@ -120,7 +123,7 @@ def game_loop():
     while not gameExit:
         # when player has been caught (work in progress)
         while gameOver == True:
-            gameDisplay.fill(black)
+            screen.fill(black)
             message_to_screen("Game over, press Spacebar to play again or Escape key to quit", white,0)
             pygame.display.update()
 
@@ -131,13 +134,13 @@ def game_loop():
                         gameOver = False
 
                     if event.key  == pygame.K_SPACE:
-                        gameLoop()
+                        game_loop()
                         
         # Exit Game by pressing the Escape Key            
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 gameExit = True
-                #pygame.quit()
+                pygame.quit()
                 #sys.exit()
             elif event.type == pygame.KEYDOWN and event.key == pygame.K_ESCAPE:
                 gameExit = True
@@ -158,10 +161,10 @@ def game_loop():
         
         for obj in list:
             obj.update(time)
-
             time = pygame.time.get_ticks() * .25
-            #obj.checkCollision(list, screen)
-
+           
+        gameOver = obj.checkCollision(list, screen)
+        
         for obj in list:
             obj.draw(screen)
         
