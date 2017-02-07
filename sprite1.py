@@ -78,10 +78,12 @@ class Player(sprite1):
       self.image.set_colorkey((255,255,255))
       self.position = vector2(x, y)
       self.velocity = vector2(vx, vy)
-      self.accel = 1
+      self.accel = 1.5
       self.previous = self.position
       self.radius = self.image.get_width()
       self.jumping = False
+      self.level = self.position.x
+      self.gameOver = False
 
    def getPlayerInput(self):
       left = pygame.key.get_pressed()[pygame.K_a]
@@ -92,10 +94,10 @@ class Player(sprite1):
 
    def jump(self):
       self.jumping = True
-      self.velocity.y = self.velocity.y - 5
+      self.velocity.y = -20 
 
    def update(self, delta):
-
+      print
       # Get user inputs
       controls = self.getPlayerInput()
 
@@ -143,18 +145,23 @@ class Player(sprite1):
          print self.position
          self.velocity.y = self.velocity.y + self.accel
          #if self.position.y >= 768-280:
-         if self.position.y >= self.screen.get_height() - (self.image.get_height() * 2):
+         if self.position.y >= self.level:
             self.velocity.y = 0
-            self.jumping = False    
-      
+            self.position.y = self.level
+            self.jumping = False
+            
       # Keep sprite in boundaries
-      if self.position.y >= self.screen.get_height() - (self.image.get_height() / 2):
-         self.position.y = self.screen.get_height() - (self.image.get_height() / 2)
-         self.velocity.y = -self.velocity.y
+      if self.position.y >= self.screen.get_height() - self.image.get_width()/2:
+         #self.position.y = self.screen.get_height() - self.image.get_width()/2
+         #self.velocity.y = -self.velocity.y 
+         print "GAME OVER"
+         #gameDisplay.fill(black)
+         self.gameOver = True
 
-      if self.position.y <= 0 + (self.image.get_height() / 2):
-         self.position.y = 0 + (self.image.get_height() / 2)   
-         self.velocity.y = -self.velocity.y
+      if self.position.y <= 0 :          
+         self.position.y = 0 
+         #self.velocity.y = -self.velocity.y
+         #print "b"
 
       if self.position.x >= self.screen.get_width() - self.image.get_width():
          self.position.x = self.screen.get_width() - self.image.get_width()
@@ -163,6 +170,25 @@ class Player(sprite1):
       if self.position.x <= 0:
          self.position.x = 0
          self.velocity.x = -self.velocity.x
+
+   def checkCollision(self, list, screen):
+      print self.position.x
+      for obj in list:
+         if obj != self:
+            if self.position.y >= obj.position.y and self.position.y <= obj.position.y + 40 and not self.jumping or self.position.y + self.image.get_height() >= obj.position.y and self.position.y + self.image.get_height() <= obj.position.y + 40 and not self.jumping:
+               print "colission"
+               self.level = self.level+10
+               self.position.y += 10
+               screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
+               if self.gameOver:
+                  return True
+               return False
+         else:
+            if (self.position.x <= 118 or self.position.x >= 778) and not self.jumping:
+               print "out of bounds"
+               self.position.y = self.position.y + 1
+               self.level = self.level + 1
+
 
 
 
@@ -259,8 +285,28 @@ class Enemy(sprite1):
          self.position.x = 0
          self.velocity.x = -self.velocity.x
 
+   def checkCollision(self, list, screen):
+      return True
 
-  
+
+#Pothole simple red rectangle for now
+class Pothole():
+   def __init__(self, screen, x, y, vx, vy):
+      pygame.draw.rect(screen, (255,0,0), (x,y, x+442,y+40), 0)
+      self.position = vector2(x, y)
+      self.velocity = vector2(vx, vy)
+      self.accel = .1
+
+   def update(self, delta):
+     self.position.y = delta %768
+
+   def draw(self, screen):
+      #pygame.draw.rect(screen, (255,5,0), (self.position.x,self.position.y, self.position.x+442,self.position.y-200), 0)
+      pygame.draw.rect(screen, (255,5,0), (self.position.x,self.position.y, self.position.x + 442, 80), 0)
+
+   def checkCollision(self, list, screen):
+      return True
+
 
 
 
