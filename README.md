@@ -37,10 +37,12 @@ For this particular demo the following files are needed:
   - Player falls back if doesn't jump obstacle 
   - Potholes have been added as a jumping obstacle
   - Gameover screen appears when user exceeds lower boundary
+  - Gameover screen gives option to Restart or Quit the game
+  - Player sprite respawns back to initial position once Restart option is selected
     
 <h4>To do:</h4>
   - Calibrate sprite movement speed
-  - Set collision arguments for sprites
+  - Refine collision arguments for sprites
   - Add sprite obstacles
   - Get better looking sprites!
     
