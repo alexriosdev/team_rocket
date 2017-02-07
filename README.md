@@ -33,6 +33,10 @@ For this particular demo the following files are needed:
   - Enemy sprite follows player like a shadow
   - Player sprite is able to jump
   - Player sprite does not go outside screen boundaries
+  - Player slows down if steps out of paved path
+  - Player falls back if doesn't jump obstacle 
+  - Potholes have been added as a jumping obstacle
+  - Gameover screen appears when user exceeds lower boundary
     
 <h4>To do:</h4>
   - Calibrate sprite movement speed
