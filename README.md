@@ -39,6 +39,7 @@ For this particular demo the following files are needed:
   - Gameover screen appears when user exceeds lower boundary
   - Gameover screen gives option to Restart or Quit the game
   - Player sprite respawns back to initial position once Restart option is selected
+  - Student sprites have been added as obstacles
     
 <h4>To do:</h4>
   - Calibrate sprite movement speed
