@@ -60,7 +60,7 @@ sprite_pos_player = 1.5
 
 # Random positions for Student Obstacles
 student_sprite_position_x = random.randint(192, 832)
-student_sprite_position_y = random.randint(0, 382)
+student_sprite_position_y = random.randint(0, 191)
 
 student_sprite_accel1 = 0.01
 student_sprite_accel2 = 0.02
@@ -129,7 +129,8 @@ def game_loop():
     time = pygame.time.get_ticks()
 
     # Player(self, screen, image, x, y, vx, vy)
-    list = [Pothole(screen, 195, 50, 0, 0),
+    list = [#Pothole(screen, 195, 50, 0, 0),
+            Pothole(screen, "pothole.png", 192, 50, 0, 0),
             Enemy( screen, "enemy.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
             #Students( screen, "student.png", student_sprite_position_x, student_sprite_position_y, 0, 1, student_sprite_accel1),
             Students( screen, "student.png", student_sprite_position_x, student_sprite_position_y, 0, 1, student_sprite_accel2), # Student sprite with medium acceleration

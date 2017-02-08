@@ -281,9 +281,11 @@ class Enemy(sprite1):
       return True
 
 # Pothole simple red rectangle for now
-class Pothole():
-   def __init__(self, screen, x, y, vx, vy):
-      pygame.draw.rect(screen, (255,0,0), (x,y, x+442,y+40), 0)
+class Pothole(sprite1):
+   def __init__(self, screen, image, x, y, vx, vy):
+      self.screen = screen
+      self.image = pygame.image.load(image).convert()
+      #pygame.draw.rect(screen, (255,0,0), (x,y, x+442,y+40), 0)
       self.position = vector2(x, y)
       self.velocity = vector2(vx, vy)
       self.accel = .1
@@ -292,19 +294,15 @@ class Pothole():
    def update(self, delta):
       self.position.y = delta % 768
 
-
-
-
-   def draw(self, screen):
-      #pygame.draw.rect(screen, (255,5,0), (self.position.x,self.position.y, self.position.x+442,self.position.y-200), 0)
-      pygame.draw.rect(screen, (255,5,0), (self.position.x,self.position.y, self.position.x + 442, 80), 0)
+   # def draw(self, screen):
+   #    #pygame.draw.rect(screen, (255,5,0), (self.position.x,self.position.y, self.position.x+442,self.position.y-200), 0)
+   #    pygame.draw.rect(screen, (255,5,0), (self.position.x,self.position.y, self.position.x + 442, 80), 0)
 
    def checkCollision(self, list, screen):
       return True
 
    def checkCollision(self, player, screen):
-        if (player.position.y >= self.position.y and player.position.y <= self.position.y + 40 and not player.jumping \
-           or player.position.y + player.image.get_height() >= self.position.y and player.position.y + player.image.get_height() <= self.position.y + 40 and not player.jumping) \
+        if (player.position.y >= self.position.y and player.position.y <= self.position.y + (self.image.get_height() / 2) and not player.jumping \
            and (player.position.x >= 118 and player.position.x <= 778) :
                print "colission"
                player.level = player.level+10
@@ -344,7 +342,7 @@ class Students(sprite1):
    def checkCollision(self, player, screen):
         if (player.position.y >= self.position.y and player.position.y <= self.position.y + self.image.get_height()\
            or player.position.y + player.image.get_height() >= self.position.y and player.position.y + player.image.get_height() <= self.position.y + self.image.get_height() ) \
-           and (player.position.x >= self.position.x and player.position.x <= self.position.x +100) :
+           and (player.position.x >= self.position.x and player.position.x <= self.position.x + player.image.get_width()) :
                print "student colission"
                player.level = player.level+10
                player.position.y += 10
