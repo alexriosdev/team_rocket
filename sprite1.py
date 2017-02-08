@@ -1,5 +1,6 @@
 import pygame
 from utils import vector2
+import random
 
 class sprite1:
    # note, no data member declarations needed
@@ -68,8 +69,6 @@ class sprite1:
    def __str__(self):
       # format allows you to replace "{}" with variable values
       return "({}, {})".format(self.position, self.velocity)
-
-
 
 class Player(sprite1):
    def __init__(self, screen, image, x,y, vx,vy):
@@ -189,11 +188,6 @@ class Player(sprite1):
                self.position.y = self.position.y + 1
                self.level = self.level + 1
 
-
-
-
-
-
 # Enemy only mimics player movements
 class Enemy(sprite1):
    def __init__(self, screen, image, x,y, vx,vy):
@@ -288,8 +282,7 @@ class Enemy(sprite1):
    def checkCollision(self, list, screen):
       return True
 
-
-#Pothole simple red rectangle for now
+# Pothole simple red rectangle for now
 class Pothole():
    def __init__(self, screen, x, y, vx, vy):
       pygame.draw.rect(screen, (255,0,0), (x,y, x+442,y+40), 0)
@@ -306,6 +299,35 @@ class Pothole():
 
    def checkCollision(self, list, screen):
       return True
+
+# Student obstacle
+class Students(sprite1):
+   def __init__(self, screen, image, x,y, vx,vy,accel):
+      self.screen = screen
+      self.image = pygame.image.load(image).convert()
+      self.image.set_colorkey((255,255,255))
+      self.position = vector2(x, y)
+      self.velocity = vector2(vx, vy)
+      self.accel = accel # Determines the rate at which sprite falls down
+      self.previous = self.position
+      self.radius = self.image.get_width()
+
+      self.velocity.y = self.velocity.y + 5
+
+   def update(self, delta):
+      # Simulates Falling/Walking down
+      self.position.y = self.position.y + (self.velocity.y * self.accel)
+      if self.position.y >= self.screen.get_height() - self.image.get_height():
+         self.position.y = random.randrange(-382,0) # sprite appears in a random spot in the y-axis, occurs offscreen as to give space for its next iteration
+         self.position.x = random.randint(192, 832) # sprite appears in a random spot in the x-axis, along the walking pathway
+
+      if self.position.y > 0:
+         self.velocity.y = self.screen.get_height() - (self.image.get_height() / 2)
+
+   def checkCollision(self, list, screen):
+      return True
+
+      
 
 
 
