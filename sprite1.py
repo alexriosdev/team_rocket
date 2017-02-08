@@ -171,22 +171,20 @@ class Player(sprite1):
          self.velocity.x = -self.velocity.x
 
    def checkCollision(self, list, screen):
-      print self.position.x
       for obj in list:
          if obj != self:
-            if self.position.y >= obj.position.y and self.position.y <= obj.position.y + 40 and not self.jumping or self.position.y + self.image.get_height() >= obj.position.y and self.position.y + self.image.get_height() <= obj.position.y + 40 and not self.jumping:
-               print "colission"
-               self.level = self.level+10
-               self.position.y += 10
-               screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
-               if self.gameOver:
-                  return True
-               return False
+            obj.checkCollision(self, screen)
+
          else:
             if (self.position.x <= 118 or self.position.x >= 778) and not self.jumping:
                print "out of bounds"
                self.position.y = self.position.y + 1
                self.level = self.level + 1
+            return self.gameOver
+      
+            
+    
+           
 
 # Enemy only mimics player movements
 class Enemy(sprite1):
@@ -289,9 +287,13 @@ class Pothole():
       self.position = vector2(x, y)
       self.velocity = vector2(vx, vy)
       self.accel = .1
+   
 
    def update(self, delta):
-     self.position.y = delta %768
+      self.position.y = delta % 768
+
+
+
 
    def draw(self, screen):
       #pygame.draw.rect(screen, (255,5,0), (self.position.x,self.position.y, self.position.x+442,self.position.y-200), 0)
@@ -299,6 +301,18 @@ class Pothole():
 
    def checkCollision(self, list, screen):
       return True
+
+   def checkCollision(self, player, screen):
+        if (player.position.y >= self.position.y and player.position.y <= self.position.y + 40 and not player.jumping \
+           or player.position.y + player.image.get_height() >= self.position.y and player.position.y + player.image.get_height() <= self.position.y + 40 and not player.jumping) \
+           and (player.position.x >= 118 and player.position.x <= 778) :
+               print "colission"
+               player.level = player.level+10
+               player.position.y += 10
+               screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
+               if player.gameOver:
+                  return True
+               return False
 
 # Student obstacle
 class Students(sprite1):
@@ -326,7 +340,18 @@ class Students(sprite1):
 
    def checkCollision(self, list, screen):
       return True
-
+   
+   def checkCollision(self, player, screen):
+        if (player.position.y >= self.position.y and player.position.y <= self.position.y + self.image.get_height()\
+           or player.position.y + player.image.get_height() >= self.position.y and player.position.y + player.image.get_height() <= self.position.y + self.image.get_height() ) \
+           and (player.position.x >= self.position.x and player.position.x <= self.position.x +100) :
+               print "student colission"
+               player.level = player.level+10
+               player.position.y += 10
+               screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
+               if player.gameOver:
+                  return True
+               return False
       
 
 
