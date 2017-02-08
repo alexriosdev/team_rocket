@@ -10,7 +10,9 @@ For this particular demo the following files are needed:
   - utils.py
   - background_update.png  
   - character.png
-  - enemy.png   
+  - enemy.png
+  - student.png
+  - pothole.png
 
 <!-- <h4>Reference Files</h4>
   - demo_play.py - (Old main file) 
