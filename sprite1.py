@@ -303,15 +303,15 @@ class Pothole(sprite1):
       return True
 
    def checkCollision(self, player, screen):
-      if (player.position.y >= self.position.y and player.position.y <= self.position.y + (self.image.get_height() / 2) and not player.jumping)\
-         and (player.position.x >= 118 and player.position.x <= 778):
-            print "colission"
-            player.level = player.level+10
-            player.position.y += 10
-            screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
-            if player.gameOver:
-               return True
-            return False
+        if (player.position.y >= self.position.y and player.position.y <= self.position.y + (self.image.get_height() / 2) and not player.jumping \
+           and (player.position.x >= 118 and player.position.x <= 778) :
+               print "colission"
+               player.level = player.level+10
+               player.position.y += 10
+               screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
+               if player.gameOver:
+                  return True
+               return False
 
 # Student obstacle
 class Students(sprite1):
