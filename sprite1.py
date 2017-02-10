@@ -303,7 +303,7 @@ class Pothole(sprite1):
       return True
 
    def checkCollision(self, player, screen):
-        if (player.position.y >= self.position.y and player.position.y <= self.position.y + (self.image.get_height() / 2) and not player.jumping \
+        if (player.position.y >= self.position.y and player.position.y <= self.position.y + (self.image.get_height() / 2) and not player.jumping) \
            and (player.position.x >= 118 and player.position.x <= 778) :
                print "colission"
                player.level = player.level+10
