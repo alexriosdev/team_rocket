@@ -77,12 +77,13 @@ class Player(sprite1):
       self.image.set_colorkey((255,255,255))
       self.position = vector2(x, y)
       self.velocity = vector2(vx, vy)
+      self.rect = pygame.Rect(self.position.x, self.position.y, self.image.get_width(), self.image.get_height() - 10)
       self.accel = 1.5
-      self.previous = self.position
-      self.radius = self.image.get_width()
       self.jumping = False
       self.level = self.position.y
       self.gameOver = False
+
+      print self.rect
 
    def getPlayerInput(self):
       left = pygame.key.get_pressed()[pygame.K_a]
@@ -97,6 +98,8 @@ class Player(sprite1):
 
    def update(self, delta):
       print
+      self.rect.y = self.position.y
+      self.rect.x = self.position.x
       # Get user inputs
       controls = self.getPlayerInput()
 
@@ -139,11 +142,9 @@ class Player(sprite1):
 
       # Update physics
       if self.jumping:
-         #self.previous = self.position
          self.position = self.position.add(self.velocity.scale((pygame.time.get_ticks()* .25) - delta ))
          print self.position
          self.velocity.y = self.velocity.y + self.accel
-         #if self.position.y >= 768-280:
          if self.position.y >= self.level:
             self.velocity.y = 0
             self.position.y = self.level
@@ -151,16 +152,11 @@ class Player(sprite1):
             
       # Keep sprite in boundaries
       if self.position.y >= self.screen.get_height() - self.image.get_width()/2:
-         #self.position.y = self.screen.get_height() - self.image.get_width()/2
-         #self.velocity.y = -self.velocity.y 
          print "GAME OVER"
-         #gameDisplay.fill(black)
          self.gameOver = True
 
       if self.position.y <= 0 :          
          self.position.y = 0 
-         #self.velocity.y = -self.velocity.y
-         #print "b"
 
       if self.position.x >= self.screen.get_width() - self.image.get_width():
          self.position.x = self.screen.get_width() - self.image.get_width()
@@ -183,8 +179,6 @@ class Player(sprite1):
             return self.gameOver
       
             
-    
-           
 
 # Enemy only mimics player movements
 class Enemy(sprite1):
@@ -195,8 +189,6 @@ class Enemy(sprite1):
       self.position = vector2(x, y)
       self.velocity = vector2(vx, vy)
       self.accel = 1
-      self.previous = self.position
-      self.radius = self.image.get_width()
       self.jumping = False
   
    def getPlayerInput(self):
@@ -286,14 +278,17 @@ class Pothole(sprite1):
       self.screen = screen
       self.image = pygame.image.load(image).convert()
       self.image.set_colorkey((255,255,255))
-      #pygame.draw.rect(screen, (255,0,0), (x,y, x+442,y+40), 0)
       self.position = vector2(x, y)
       self.velocity = vector2(vx, vy)
+      self.rect = pygame.Rect(self.position.x + 15, self.position.y, self.image.get_width() - 5, self.image.get_height() - 15)
       self.accel = .1
-   
 
+      
    def update(self, delta):
       self.position.y = delta % 768
+      self.rect.y = self.position.y
+
+      print self.rect
 
    # def draw(self, screen):
    #    #pygame.draw.rect(screen, (255,5,0), (self.position.x,self.position.y, self.position.x+442,self.position.y-200), 0)
@@ -303,9 +298,8 @@ class Pothole(sprite1):
       return True
 
    def checkCollision(self, player, screen):
-        if (player.position.y >= self.position.y and player.position.y <= self.position.y + (self.image.get_height() / 2) and not player.jumping) \
-           and (player.position.x >= 118 and player.position.x <= 778) :
-               print "colission"
+        if (self.rect.colliderect(player.rect) and not player.jumping):
+               print "colission", self.rect.x, player.rect.x
                player.level = player.level+10
                player.position.y += 10
                screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
@@ -321,6 +315,7 @@ class Students(sprite1):
       self.image.set_colorkey((255,255,255))
       self.position = vector2(x, y)
       self.velocity = vector2(vx, vy)
+      self.rect = pygame.Rect(self.position.x, self.position.y, self.image.get_width(), self.image.get_height())
       self.accel = accel # Determines the rate at which sprite falls down
       self.previous = self.position
       self.radius = self.image.get_width()
@@ -328,6 +323,9 @@ class Students(sprite1):
       self.velocity.y = self.velocity.y + 5
 
    def update(self, delta):
+      self.rect.y = self.position.y
+      self.rect.x = self.position.x
+      
       # Simulates Falling/Walking down
       self.position.y = self.position.y + (self.velocity.y * self.accel)
       if self.position.y >= self.screen.get_height() - self.image.get_height():
@@ -341,9 +339,7 @@ class Students(sprite1):
       return True
    
    def checkCollision(self, player, screen):
-        if (player.position.y >= self.position.y and player.position.y <= self.position.y + self.image.get_height()\
-           or player.position.y + player.image.get_height() >= self.position.y and player.position.y + player.image.get_height() <= self.position.y + self.image.get_height() ) \
-           and (player.position.x >= self.position.x and player.position.x <= self.position.x + player.image.get_width()) :
+         if (self.rect.colliderect(player.rect)):
                print "student colission"
                player.level = player.level+10
                player.position.y += 10
