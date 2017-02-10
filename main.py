@@ -23,6 +23,9 @@ background = pygame.image.load('background_update.png')
 background_size = background.get_size()
 background_rect = background.get_rect()
 
+# Background Music
+pygame.mixer.music.load('song.mp3')
+
 # Set screen to background dimentions
 screen = pygame.display.set_mode(background_size)
 
@@ -48,7 +51,7 @@ background_speed = 10
 
 # Sprite Position
 sprite_position_x = (background_width / 2) - (player_width / 2)    # Place sprite in the center of x-axis
-sprite_position_y = background_height - (player_height * 1.8)      # Place sprite a couple of pixels above the bottom border of the y-axis
+sprite_position_y = sprite_position_x      # Place sprite a couple of pixels above the bottom border of the y-axis
 
 # Sprite Speed and Relative Position
 sprite_pos_enemy = 0.2 
@@ -95,6 +98,7 @@ def game_intro():
 
 # Game Loop
 def game_loop():
+    pygame.mixer.music.play(-1, 0)
     
     # Variables
     gameExit = False

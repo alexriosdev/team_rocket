@@ -83,7 +83,7 @@ class Player(sprite1):
       self.level = self.position.y
       self.gameOver = False
 
-      print self.rect
+     
 
    def getPlayerInput(self):
       left = pygame.key.get_pressed()[pygame.K_a]
@@ -290,12 +290,6 @@ class Pothole(sprite1):
    def update(self, delta):
       self.position.y = delta % 768
       self.rect.y = self.position.y
-
-      print self.rect
-
-   # def draw(self, screen):
-   #    #pygame.draw.rect(screen, (255,5,0), (self.position.x,self.position.y, self.position.x+442,self.position.y-200), 0)
-   #    pygame.draw.rect(screen, (255,5,0), (self.position.x,self.position.y, self.position.x + 442, 80), 0)
 
    def checkCollision(self, list, screen):
       return True
