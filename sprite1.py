@@ -81,7 +81,7 @@ class Player(sprite1):
       self.previous = self.position
       self.radius = self.image.get_width()
       self.jumping = False
-      self.level = self.position.x
+      self.level = self.position.y
       self.gameOver = False
 
    def getPlayerInput(self):
