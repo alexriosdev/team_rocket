@@ -285,6 +285,7 @@ class Pothole(sprite1):
    def __init__(self, screen, image, x, y, vx, vy):
       self.screen = screen
       self.image = pygame.image.load(image).convert()
+      self.image.set_colorkey((255,255,255))
       #pygame.draw.rect(screen, (255,0,0), (x,y, x+442,y+40), 0)
       self.position = vector2(x, y)
       self.velocity = vector2(vx, vy)
