@@ -54,18 +54,6 @@ sprite_position_y = background_height - (player_height * 1.8)      # Place sprit
 sprite_pos_enemy = 0.2 
 sprite_pos_player = 1.5
 
-# Part of Old Code
-# sprite_speed_enemy = 0.8
-# sprite_speed_player = 1
-
-# Random positions for Student Obstacles
-student_sprite_position_x = random.randint(192, 832)
-student_sprite_position_y = random.randint(0, 191)
-
-student_sprite_accel1 = 0.01
-student_sprite_accel2 = 0.02
-student_sprite_accel3 = 0.03
-
 enemy = pygame.image.load('enemy.png')
 enemy_sprite_position_y = background_height - (player_height * sprite_pos_enemy) 
 
@@ -75,7 +63,6 @@ font = pygame.font.SysFont(None, 25)
 def message_to_screen(msg,color,y):
     text = font.render(msg, True, color)
     text_rect = text.get_rect(center=(background_width/2, (background_height/2) + y))
-    # screen.blit(screen_text, [background_width/2, y])
     screen.blit(text, text_rect)
 
 # Start Screen 
@@ -104,14 +91,7 @@ def game_intro():
         message_to_screen("Press C to continue, Q to quit",white,95.5)
 
         pygame.display.update()
-        Clock.tick(FPS)
-
-# Player(self, screen, image, x, y, vx, vy, y_len)
-#list = [Pothole(screen, 195, 50, 0, 0),
-#        Enemy( screen, "enemy.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
-#        Player( screen, "character.png", sprite_position_x, sprite_position_y, 0, 1)
-#       ]
- 
+        Clock.tick(FPS)   
 
 # Game Loop
 def game_loop():
@@ -125,18 +105,23 @@ def game_loop():
 
     x1 = 0
     y1 = -background_height
-
+    
     time = pygame.time.get_ticks()
 
-    # Player(self, screen, image, x, y, vx, vy)
-    list = [#Pothole(screen, 195, 50, 0, 0),
+
+    students = []
+    for i in range(3):
+        student =  Students( screen, "student.png", random.randint(192, 832), random.randint(0, 191), 0, 1, random.uniform(0.03, .01))
+        students.append(student)
+
+    list = [
             Pothole(screen, "pothole.png", 192, 50, 0, 0),
-            Enemy( screen, "enemy.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
-            #Students( screen, "student.png", student_sprite_position_x, student_sprite_position_y, 0, 1, student_sprite_accel1),
-            Students( screen, "student.png", student_sprite_position_x, student_sprite_position_y, 0, 1, student_sprite_accel2), # Student sprite with medium acceleration
-            #Students( screen, "student.png", student_sprite_position_x, student_sprite_position_y, 0, 1, student_sprite_accel3),
-            Player( screen, "character.png", sprite_position_x, sprite_position_y, 0, 1)
+            Enemy( screen, "enemy.png", sprite_position_x, enemy_sprite_position_y, 0, 1)
            ]
+
+    for i in students:
+        list.append(i)
+    list.append(Player( screen, "character.png", sprite_position_x, sprite_position_y, 0, 1))
 
     # while game has not been closed
     while not gameExit:

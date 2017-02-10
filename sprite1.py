@@ -94,7 +94,9 @@ class Player(sprite1):
 
    def jump(self):
       self.jumping = True
-      self.velocity.y = -20 
+      self.velocity.y = -20
+      self.position.y += .01
+      self.level += .01
 
    def update(self, delta):
       print
@@ -201,6 +203,7 @@ class Enemy(sprite1):
    def jump(self):
       self.jumping = True
       self.velocity.y = self.velocity.y - 5
+
 
    def update(self, delta):
 
