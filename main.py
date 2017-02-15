@@ -80,7 +80,7 @@ def game_intro():
                 quit()
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_c:
+                if event.key == pygame.K_SPACE:
                     intro = False
                 if event.key == pygame.K_q:
                     pygame.quit()
@@ -91,13 +91,15 @@ def game_intro():
         message_to_screen("The objective of this game is to escape the law",white,-50)
         message_to_screen("Use A to move left, D to move right",white,0)
         message_to_screen("Use Spacebar to jump",white,50)
-        message_to_screen("Press C to continue, Q to quit",white,95.5)
+        message_to_screen("Press Spacebar to continue, Q to quit",white,95.5)
 
         pygame.display.update()
         Clock.tick(FPS)   
 
 # Game Loop
 def game_loop():
+    score = 0
+
     pygame.mixer.music.play(-1, 0)
     
     # Variables
@@ -112,19 +114,12 @@ def game_loop():
     
     time = pygame.time.get_ticks()
 
-
-    students = []
-    for i in range(3):
-        student =  Students( screen, "student.png", random.randint(192, 832), random.randint(0, 191), 0, 1, random.uniform(0.03, .01))
-        students.append(student)
-
     list = [
             Pothole(screen, "pothole.png", 192, 50, 0, 0),
-            Enemy( screen, "enemy.png", sprite_position_x, enemy_sprite_position_y, 0, 1)
+            Enemy( screen, "enemy.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
+            Students( screen, "student.png", random.randint(192, 832), random.randint(0, 191), 0, 1, random.uniform(0.03, .01))
            ]
 
-    for i in students:
-        list.append(i)
     list.append(Player( screen, "character.png", sprite_position_x, sprite_position_y, 0, 1))
 
     # while game has not been closed
@@ -132,8 +127,10 @@ def game_loop():
         # when player has been caught (work in progress)
         while gameOver == True:
             screen.fill(black)
-            message_to_screen("Game over, press C to play again or Escape key to quit", white,0)
+            message_to_screen("SCORE: " + str(score), white, -40)
+            message_to_screen("Game over, press Spacebar to play again or Escape key to quit", white,0)
             pygame.display.update()
+            pygame.init()
 
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
@@ -141,7 +138,7 @@ def game_loop():
                         gameExit = True
                         gameOver = False
 
-                    if event.key  == pygame.K_c:
+                    if event.key  == pygame.K_SPACE:
                         game_loop()
                         
         # Exit Game by pressing the Escape Key            
@@ -166,6 +163,10 @@ def game_loop():
             y = -background_height
         if y1 > background_height:
             y1 = -background_height
+
+        if int(score) % 500 == 0:
+            student =  Students( screen, "student.png", random.randint(192, 832), random.randint(0, 191), 0, 1, random.uniform(0.03, .01))
+            list.insert(1,student)
         
         for obj in list:
             obj.update(time)
@@ -173,11 +174,24 @@ def game_loop():
            
         gameOver = obj.checkCollision(list, screen)
         
+        
         for obj in list:
             obj.draw(screen)
-        
+
+        score = score + 1
+
+        basicfont = pygame.font.SysFont(None, 48)
+        text = basicfont.render("score: " + str(score) , True, (255, 255, 255))
+        screen.blit(text, (8,4))
+                    
         pygame.display.flip()
         pygame.display.update()
+
+        #int(time * 4  / 1000))
+
+        
+          
+
 
         Clock.tick(FPS)
 

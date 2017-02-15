@@ -40,8 +40,6 @@ class sprite1:
            self.velocity.x = -self.velocity.x
 
    def draw(self, screen):
-       #pygame.draw.rect(screen, (0,0,255),(self.position.x -20  , self.position.y-200, self.image.get_width() + 40, self.image.get_width() + 20),0)
-       #pygame.draw.circle(screen, (255,255,255), (int(self.position.x)+self.image.get_width()/2, int(self.position.y)), self.image.get_width() / 2, 1)
        screen.set_colorkey((0,0,0))
        screen.blit( self.image, (self.position.x, self.position.y) )
        
@@ -60,7 +58,6 @@ class sprite1:
             if collision.magnitude() <= obj.radius:
                print collision.magnitude(), obj.radius, "collision"
                obj.position.subtract(collision)
-               #obj.position.subtract(collision.normalized().scale(self.radius*2 - collision.magnitude()))
                self.position.subtract(collision.normalized().scale(self.radius*2 - collision.magnitude()))
                obj.collide(screen)         
                
@@ -77,7 +74,7 @@ class Player(sprite1):
       self.image.set_colorkey((255,255,255))
       self.position = vector2(x, y)
       self.velocity = vector2(vx, vy)
-      self.rect = pygame.Rect(self.position.x, self.position.y, self.image.get_width(), self.image.get_height() - 10)
+      self.rect = pygame.Rect(self.position.x + 15, self.position.y + 15, self.image.get_width() - 70, self.image.get_height()-50)
       self.accel = 1.5
       self.jumping = False
       self.level = self.position.y
@@ -100,8 +97,9 @@ class Player(sprite1):
 
    def update(self, delta):
       print
-      self.rect.y = self.position.y
-      self.rect.x = self.position.x
+      self.rect.y = self.position.y + 40
+      self.rect.x = self.position.x + 30
+      
       # Get user inputs
       controls = self.getPlayerInput()
 
@@ -283,7 +281,7 @@ class Pothole(sprite1):
       self.image.set_colorkey((255,255,255))
       self.position = vector2(x, y)
       self.velocity = vector2(vx, vy)
-      self.rect = pygame.Rect(self.position.x + 15, self.position.y, self.image.get_width() - 5, self.image.get_height() - 15)
+      self.rect = pygame.Rect(self.position.x , self.position.y, self.image.get_width(), self.image.get_height())
       self.accel = .1
 
       
