@@ -75,12 +75,11 @@ class Player(sprite1):
       # self.image.set_colorkey((255,255,255)) #when using convert_alpha, this is not needed
       self.position = vector2(x, y)
       self.velocity = vector2(vx, vy)
-      self.rect = pygame.Rect(self.position.x + 15, self.position.y + 15, self.image.get_width() - 70, self.image.get_height()-50)
+      self.rect = pygame.Rect(self.position.x + 15, self.position.y + 15, self.image.get_width() - 70, self.image.get_height()-40)
       self.accel = 1.5
       self.jumping = False
       self.level = self.position.y
       self.gameOver = False
-      self.clip = pygame.Rect( 0, 0, 160, 180 )
       self.images = [pygame.image.load('c1_new.png').convert_alpha(),pygame.image.load('c2_new.png').convert_alpha(),pygame.image.load('c3_new.png').convert_alpha(), pygame.image.load('c4_new.png').convert_alpha()]
       self.i = 0
 
@@ -106,7 +105,7 @@ class Player(sprite1):
    def update(self, delta):
       print
       self.rect.y = self.position.y + 40
-      self.rect.x = self.position.x + 30
+      self.rect.x = self.position.x + 35
       self.i = ((self.i +.17) % 100) %2
       
       # Get user inputs
@@ -340,7 +339,7 @@ class Students(sprite1):
 
       self.velocity.y = self.velocity.y + 5
 
-      self.rect = pygame.Rect(self.position.x + 15, self.position.y + 15, self.image.get_width() - 70, self.image.get_height()-50)
+      self.rect = pygame.Rect(self.position.x + 30  , self.position.y, self.image.get_width() - 68, self.image.get_height())
       self.clip = pygame.Rect( 0, 0, 160, 180 )
       self.images = [pygame.image.load('s1_new.png').convert_alpha(),pygame.image.load('s2_new.png').convert_alpha(),pygame.image.load('s3_new.png').convert_alpha(), pygame.image.load('s4_new.png').convert_alpha()]
       self.i = 0
@@ -353,9 +352,9 @@ class Students(sprite1):
 
    def update(self, delta):
       self.rect.y = self.position.y
-      self.rect.x = self.position.x
+      self.rect.x = self.position.x + 30
 
-      self.i = ((self.i +.25) % 100) %4
+      self.i = ((self.i +.14) % 100) %2
       
       # Simulates Falling/Walking down
       self.position.y = self.position.y + (self.velocity.y * self.accel)
