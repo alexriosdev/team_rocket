@@ -10,7 +10,7 @@ For this particular demo the following files are needed:
   - utils.py
   - background_update.png  
   - c1-4_new.png (player sprites)
-  - enemy.png
+  - e1-4_new.png (enemy sprites)
   - student.png
   - pothole.png
 
