@@ -57,7 +57,7 @@ sprite_position_y = sprite_position_x      # Place sprite a couple of pixels abo
 sprite_pos_enemy = 0.2 
 sprite_pos_player = 1.5
 
-enemy = pygame.image.load('enemy.png')
+enemy = pygame.image.load('e1_new.png')
 enemy_sprite_position_y = background_height - (player_height * sprite_pos_enemy) 
 
 font = pygame.font.SysFont(None, 25)

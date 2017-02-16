@@ -199,6 +199,12 @@ class Enemy(sprite1):
       self.velocity = vector2(vx, vy)
       self.accel = 1
       self.jumping = False
+
+      self.rect = pygame.Rect(self.position.x + 15, self.position.y + 15, self.image.get_width() - 70, self.image.get_height()-50)
+      self.clip = pygame.Rect( 0, 0, 160, 180 )
+      self.images = [pygame.image.load('e1_new.png').convert_alpha(),pygame.image.load('e2_new.png').convert_alpha(),pygame.image.load('e3_new.png').convert_alpha(), pygame.image.load('e4_new.png').convert_alpha()]
+      self.i = 0
+
   
    def getPlayerInput(self):
       left = pygame.key.get_pressed()[pygame.K_a]
@@ -211,8 +217,16 @@ class Enemy(sprite1):
       self.jumping = True
       self.velocity.y = self.velocity.y - 5
 
+   def draw(self, screen):
+      screen.set_colorkey((0,0,0))
+      screen.blit( self.image, (self.position.x, self.position.y))
+      if not self.jumping:
+         self.image = self.images[int(self.i)]
 
    def update(self, delta):
+      self.rect.y = self.position.y + 40
+      self.rect.x = self.position.x + 30
+      self.i = ((self.i +.25) % 100) %4
 
       #get Input
       controls = self.getPlayerInput()
