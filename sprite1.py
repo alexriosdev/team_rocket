@@ -70,6 +70,7 @@ class sprite1:
 class Player(sprite1):
    def __init__(self, screen, image, x,y, vx,vy):
       self.screen = screen
+      screen.set_colorkey((0,0,0))
       self.image = pygame.image.load(image).convert()
       self.image.set_colorkey((255,255,255))
       self.position = vector2(x, y)
@@ -79,8 +80,9 @@ class Player(sprite1):
       self.jumping = False
       self.level = self.position.y
       self.gameOver = False
-
-     
+      self.clip = pygame.Rect( 0, 0, 160, 180 )
+      self.images = [pygame.image.load('c1.png').convert(),pygame.image.load('c2.png').convert(),pygame.image.load('c3.png').convert(), pygame.image.load('c4.png').convert()]
+      self.i = 0
 
    def getPlayerInput(self):
       left = pygame.key.get_pressed()[pygame.K_a]
@@ -95,10 +97,17 @@ class Player(sprite1):
       self.position.y += .01
       self.level += .01
 
+   def draw(self, screen):
+      screen.set_colorkey((0,0,0))
+      screen.blit( self.image, (self.position.x, self.position.y))
+      if not self.jumping:
+         self.image = self.images[int(self.i)]
+
    def update(self, delta):
       print
       self.rect.y = self.position.y + 40
       self.rect.x = self.position.x + 30
+      self.i = ((self.i +.25) % 100) %4
       
       # Get user inputs
       controls = self.getPlayerInput()
@@ -174,8 +183,8 @@ class Player(sprite1):
          else:
             if (self.position.x <= 118 or self.position.x >= 778) and not self.jumping:
                print "out of bounds"
-               self.position.y = self.position.y + 1
-               self.level = self.level + 1
+               #self.position.y = self.position.y + 1
+               #self.level = self.level + 1
             return self.gameOver
       
             
