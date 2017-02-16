@@ -11,8 +11,9 @@ For this particular demo the following files are needed:
   - background_update.png  
   - c1-4_new.png (player sprites)
   - e1-4_new.png (enemy sprites)
-  - student.png
+  - s1-4_new.png (student sprites)
   - pothole.png
+  - song.mp3
 
 <!-- <h4>Reference Files</h4>
   - demo_play.py - (Old main file) 
@@ -46,6 +47,7 @@ For this particular demo the following files are needed:
   - Score system added and displayed
   - Obstacles are added every time score icrements 500 points
   - Running animation added to player sprite
+  - Running animation added to enemy and student sprites
     
 <h4>To do:</h4>
   - Add sprite obstacles
