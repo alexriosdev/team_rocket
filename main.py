@@ -30,7 +30,7 @@ pygame.mixer.music.load('song.mp3')
 screen = pygame.display.set_mode(background_size)
 
 # Player Image
-player = pygame.image.load('c1.png')
+player = pygame.image.load('c1_new.png')
 
 player_size = player.get_size()
 player_rect = player.get_rect()
@@ -117,7 +117,7 @@ def game_loop():
     list = [
             Pothole(screen, "pothole.png", 192, 50, 0, 0),
             Enemy( screen, "enemy.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
-            Player( screen, "character.png", sprite_position_x, sprite_position_y, 0, 1)
+            Player( screen, "c2_new.png", sprite_position_x, sprite_position_y, 0, 1)
            ]
 
     # while game has not been closed

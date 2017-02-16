@@ -71,8 +71,8 @@ class Player(sprite1):
    def __init__(self, screen, image, x,y, vx,vy):
       self.screen = screen
       screen.set_colorkey((0,0,0))
-      self.image = pygame.image.load(image).convert()
-      self.image.set_colorkey((255,255,255))
+      self.image = pygame.image.load(image).convert_alpha()
+      # self.image.set_colorkey((255,255,255)) #when using convert_alpha, this is not needed
       self.position = vector2(x, y)
       self.velocity = vector2(vx, vy)
       self.rect = pygame.Rect(self.position.x + 15, self.position.y + 15, self.image.get_width() - 70, self.image.get_height()-50)
@@ -81,7 +81,7 @@ class Player(sprite1):
       self.level = self.position.y
       self.gameOver = False
       self.clip = pygame.Rect( 0, 0, 160, 180 )
-      self.images = [pygame.image.load('c1.png').convert(),pygame.image.load('c2.png').convert(),pygame.image.load('c3.png').convert(), pygame.image.load('c4.png').convert()]
+      self.images = [pygame.image.load('c1_new.png').convert_alpha(),pygame.image.load('c2_new.png').convert_alpha(),pygame.image.load('c3_new.png').convert_alpha(), pygame.image.load('c4_new.png').convert_alpha()]
       self.i = 0
 
    def getPlayerInput(self):
@@ -183,8 +183,8 @@ class Player(sprite1):
          else:
             if (self.position.x <= 118 or self.position.x >= 778) and not self.jumping:
                print "out of bounds"
-               #self.position.y = self.position.y + 1
-               #self.level = self.level + 1
+               self.position.y = self.position.y + 1
+               self.level = self.level + 1
             return self.gameOver
       
             
