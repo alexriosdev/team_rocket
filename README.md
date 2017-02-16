@@ -43,13 +43,16 @@ For this particular demo the following files are needed:
   - Player sprite respawns back to initial position once Restart option is selected
   - Student sprites have been added as obstacles
   - Collision rules have been added to student sprites
+  - Score system added and displayed
+  - Obstacles are added every time score icrements 500 points
     
 <h4>To do:</h4>
-  - Calibrate sprite movement speed
-  - Refine collision arguments for sprites
   - Add sprite obstacles
   - Get better looking sprites!
   - Get sprite animations
+  
+<h4>Changes:</h4>
+   - SPACEBAR is used to start the game so that users will already be set to jump when game starts
     
 
 
