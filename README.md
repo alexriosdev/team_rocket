@@ -9,7 +9,7 @@ For this particular demo the following files are needed:
   - sprite1.py
   - utils.py
   - background_update.png  
-  - character.png
+  - c1-4_new.png (player sprites)
   - enemy.png
   - student.png
   - pothole.png
@@ -45,6 +45,7 @@ For this particular demo the following files are needed:
   - Collision rules have been added to student sprites
   - Score system added and displayed
   - Obstacles are added every time score icrements 500 points
+  - Running animation added to player sprite
     
 <h4>To do:</h4>
   - Add sprite obstacles
