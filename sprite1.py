@@ -107,7 +107,7 @@ class Player(sprite1):
       print
       self.rect.y = self.position.y + 40
       self.rect.x = self.position.x + 30
-      self.i = ((self.i +.25) % 100) %4
+      self.i = ((self.i +.17) % 100) %2
       
       # Get user inputs
       controls = self.getPlayerInput()
@@ -202,7 +202,7 @@ class Enemy(sprite1):
 
       self.rect = pygame.Rect(self.position.x + 15, self.position.y + 15, self.image.get_width() - 70, self.image.get_height()-50)
       self.clip = pygame.Rect( 0, 0, 160, 180 )
-      self.images = [pygame.image.load('e1_new.png').convert_alpha(),pygame.image.load('e2_new.png').convert_alpha(),pygame.image.load('e3_new.png').convert_alpha(), pygame.image.load('e4_new.png').convert_alpha()]
+      self.images = [pygame.image.load('security1.png').convert_alpha(),pygame.image.load('security2.png').convert_alpha()]
       self.i = 0
 
   
@@ -226,7 +226,7 @@ class Enemy(sprite1):
    def update(self, delta):
       self.rect.y = self.position.y + 40
       self.rect.x = self.position.x + 30
-      self.i = ((self.i +.25) % 100) %4
+      self.i = ((self.i +.15) % 100) %2
 
       #get Input
       controls = self.getPlayerInput()

@@ -57,7 +57,7 @@ sprite_position_y = sprite_position_x      # Place sprite a couple of pixels abo
 sprite_pos_enemy = 0.2 
 sprite_pos_player = 1.5
 
-enemy = pygame.image.load('e1_new.png')
+enemy = pygame.image.load('security1.png')
 enemy_sprite_position_y = background_height - (player_height * sprite_pos_enemy) 
 
 font = pygame.font.SysFont(None, 25)
@@ -115,8 +115,8 @@ def game_loop():
     time = pygame.time.get_ticks()
 
     list = [
-            Pothole(screen, "pothole.png", 192, 50, 0, 0),
-            Enemy( screen, "e1_new.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
+            Pothole(screen, "bench.png", 192, 50, 0, 0),
+            Enemy( screen, "security1.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
             Player( screen, "c2_new.png", sprite_position_x, sprite_position_y, 0, 1)
            ]
 
