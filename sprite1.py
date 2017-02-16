@@ -75,7 +75,7 @@ class Player(sprite1):
       # self.image.set_colorkey((255,255,255)) #when using convert_alpha, this is not needed
       self.position = vector2(x, y)
       self.velocity = vector2(vx, vy)
-      self.rect = pygame.Rect(self.position.x + 15, self.position.y + 15, self.image.get_width() - 70, self.image.get_height()-40)
+      self.rect = pygame.Rect(self.position.x + 15, self.position.y + 15, self.image.get_width() - 70, self.image.get_height()-44)
       self.accel = 1.5
       self.jumping = False
       self.level = self.position.y
