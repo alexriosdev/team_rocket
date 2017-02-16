@@ -340,9 +340,22 @@ class Students(sprite1):
 
       self.velocity.y = self.velocity.y + 5
 
+      self.rect = pygame.Rect(self.position.x + 15, self.position.y + 15, self.image.get_width() - 70, self.image.get_height()-50)
+      self.clip = pygame.Rect( 0, 0, 160, 180 )
+      self.images = [pygame.image.load('s1_new.png').convert_alpha(),pygame.image.load('s2_new.png').convert_alpha(),pygame.image.load('s3_new.png').convert_alpha(), pygame.image.load('s4_new.png').convert_alpha()]
+      self.i = 0
+
+
+   def draw(self, screen):
+      screen.set_colorkey((0,0,0))
+      screen.blit( self.image, (self.position.x, self.position.y))
+      self.image = self.images[int(self.i)]
+
    def update(self, delta):
       self.rect.y = self.position.y
       self.rect.x = self.position.x
+
+      self.i = ((self.i +.25) % 100) %4
       
       # Simulates Falling/Walking down
       self.position.y = self.position.y + (self.velocity.y * self.accel)

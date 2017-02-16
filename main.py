@@ -116,7 +116,7 @@ def game_loop():
 
     list = [
             Pothole(screen, "pothole.png", 192, 50, 0, 0),
-            Enemy( screen, "enemy.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
+            Enemy( screen, "e1_new.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
             Player( screen, "c2_new.png", sprite_position_x, sprite_position_y, 0, 1)
            ]
 
@@ -163,7 +163,7 @@ def game_loop():
             y1 = -background_height
 
         if int(score) % 500 == 0:
-            student =  Students( screen, "student.png", random.randint(192, 832), random.randint(0, 191), 0, 1, random.uniform(0.03, .01))
+            student =  Students( screen, "s1_new.png", random.randint(192, 832), random.randint(0, 191), 0, 1, random.uniform(0.03, .01))
             list.insert(1,student)
         
         for obj in list:
