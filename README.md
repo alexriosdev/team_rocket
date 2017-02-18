@@ -48,6 +48,8 @@ For this particular demo the following files are needed:
   - Obstacles are added every time score icrements 500 points
   - Running animation added to player sprite
   - Running animation added to enemy and student sprites
+  - Powerup sprite added
+  - Player moves up when touching a powerup sprite
     
 <h4>To do:</h4>
   - Add sprite obstacles
