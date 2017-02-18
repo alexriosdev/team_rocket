@@ -100,7 +100,7 @@ def game_intro():
 def game_loop():
     score = 0
 
-    pygame.mixer.music.play(-1, 0)
+    #pygame.mixer.music.play(-1, 0)
     
     # Variables
     gameExit = False
@@ -165,7 +165,12 @@ def game_loop():
         if int(score) % 500 == 0:
             student =  Students( screen, "s1_new.png", random.randint(192, 832), random.randint(0, 191), 0, 1, random.uniform(0.03, .01))
             list.insert(1,student)
-        
+
+        if int(score) % 900 == 0:
+            powerup =  Powerup( screen, "coffee4.png", random.randint(192, 832), random.randint(-382, 0), 0, 1, random.uniform(0.03, .01))
+            list.insert(0,powerup)
+
+
         for obj in list:
             obj.update(time)
             time = pygame.time.get_ticks() * .25

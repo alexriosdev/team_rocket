@@ -378,7 +378,63 @@ class Students(sprite1):
                   return True
                return False
       
+# Powerup
+class Powerup(sprite1):
+   def __init__(self, screen, image, x, y, vx, vy, accel):
+      self.screen = screen
+      self.image = pygame.image.load(image).convert()
+      self.image.set_colorkey((255,255,255))
+      self.position = vector2(x, y)
+      self.velocity = vector2(vx, vy)
+      self.rect = pygame.Rect(self.position.x, self.position.y, self.image.get_width(), self.image.get_height())
+      self.accel = accel # Determines the rate at which sprite falls down
+      self.previous = self.position
+      self.radius = self.image.get_width()
 
+      self.velocity.y = self.velocity.y + 5
+
+      self.rect = pygame.Rect(self.position.x + 30  , self.position.y, self.image.get_width() - 68, self.image.get_height())
+      self.clip = pygame.Rect( 0, 0, 160, 180 )
+      self.images = [pygame.image.load('coffee1.png').convert_alpha(),pygame.image.load('coffee2.png').convert_alpha(),pygame.image.load('coffee3.png').convert_alpha(), pygame.image.load('coffee4.png').convert_alpha()]
+      self.i = 0
+
+      
+   def draw(self, screen):
+      screen.set_colorkey((0,0,0))
+      screen.blit( self.image, (self.position.x, self.position.y))
+      self.image = self.images[int(self.i)]
+
+   def update(self, delta):
+      self.rect.y = self.position.y
+      self.rect.x = self.position.x + 30
+
+      self.i = ((self.i +.14) % 100) %4
+      
+      # Simulates Falling/Walking down
+      self.position.y = self.position.y + (self.velocity.y * self.accel)
+      if self.position.y >= self.screen.get_height() - self.image.get_height():
+         self.position.y = random.randrange(-382,0) # sprite appears in a random spot in the y-axis, occurs offscreen as to give space for its next iteration
+         self.position.x = random.randint(192, 832) # sprite appears in a random spot in the x-axis, along the walking pathway
+
+      if self.position.y > 0 or self.position.y < 0:
+         self.velocity.y = self.screen.get_height() - (self.image.get_height() / 2)
+
+   def checkCollision(self, list, screen):
+      return True
+
+   def checkCollision(self, player, screen):
+        if (self.rect.colliderect(player.rect) and not player.jumping):
+               print "POWERUP!", self.rect.x, player.rect.x
+               player.level = player.level-10
+               player.position.y -= 10
+               screen.fill((0, 255, 0, 255), None, pygame.BLEND_RGBA_MULT)
+
+               # After Player touches the powerup, powerup 'dissapears'
+               if (self.rect.y > player.rect.y):
+                  self.position.y = self.screen.get_height()
+               # if player.gameOver:
+               #    return True
+               return False
 
 
 
