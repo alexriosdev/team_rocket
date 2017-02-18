@@ -84,8 +84,8 @@ class Player(sprite1):
       self.i = 0
 
    def getPlayerInput(self):
-      left = pygame.key.get_pressed()[pygame.K_a]
-      right = pygame.key.get_pressed()[pygame.K_d]
+      left = pygame.key.get_pressed()[pygame.K_a] or pygame.key.get_pressed()[pygame.K_LEFT]
+      right = pygame.key.get_pressed()[pygame.K_d] or pygame.key.get_pressed()[pygame.K_RIGHT]
       jump = pygame.key.get_pressed()[pygame.K_SPACE]
 
       return (left, right, jump)
@@ -206,8 +206,8 @@ class Enemy(sprite1):
 
   
    def getPlayerInput(self):
-      left = pygame.key.get_pressed()[pygame.K_a]
-      right = pygame.key.get_pressed()[pygame.K_d]
+      left = pygame.key.get_pressed()[pygame.K_a] or pygame.key.get_pressed()[pygame.K_LEFT]
+      right = pygame.key.get_pressed()[pygame.K_d] or pygame.key.get_pressed()[pygame.K_RIGHT]
       jump = pygame.key.get_pressed()[pygame.K_SPACE]
 
       return (left, right, jump)
