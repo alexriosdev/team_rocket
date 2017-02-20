@@ -80,7 +80,7 @@ class Player(sprite1):
       self.jumping = False
       self.level = self.position.y
       self.gameOver = False
-      self.images = [pygame.image.load('c1_new.png').convert_alpha(),pygame.image.load('c2_new.png').convert_alpha(),pygame.image.load('c3_new.png').convert_alpha(), pygame.image.load('c4_new.png').convert_alpha()]
+      self.images = [pygame.image.load('player1.png').convert_alpha(),pygame.image.load('player2.png').convert_alpha(),pygame.image.load('player1.png').convert_alpha(), pygame.image.load('player3.png').convert_alpha()]
       self.i = 0
 
    def getPlayerInput(self):
@@ -106,7 +106,7 @@ class Player(sprite1):
       print
       self.rect.y = self.position.y + 40
       self.rect.x = self.position.x + 35
-      self.i = ((self.i +.17) % 100) %2
+      self.i = ((self.i +.15) % 100) %4
       
       # Get user inputs
       controls = self.getPlayerInput()
@@ -201,7 +201,7 @@ class Enemy(sprite1):
 
       self.rect = pygame.Rect(self.position.x + 15, self.position.y + 15, self.image.get_width() - 70, self.image.get_height()-50)
       self.clip = pygame.Rect( 0, 0, 160, 180 )
-      self.images = [pygame.image.load('security1.png').convert_alpha(),pygame.image.load('security2.png').convert_alpha()]
+      self.images = [pygame.image.load('security1.png').convert_alpha(),pygame.image.load('security2.png').convert_alpha(),pygame.image.load('security1.png').convert_alpha(),pygame.image.load('security3.png').convert_alpha()]
       self.i = 0
 
   
@@ -225,7 +225,7 @@ class Enemy(sprite1):
    def update(self, delta):
       self.rect.y = self.position.y + 40
       self.rect.x = self.position.x + 30
-      self.i = ((self.i +.15) % 100) %2
+      self.i = ((self.i +.15) % 100) %4
 
       #get Input
       controls = self.getPlayerInput()
@@ -295,7 +295,7 @@ class Enemy(sprite1):
    def checkCollision(self, list, screen):
       return True
 
-# Pothole simple red rectangle for now
+# Could be replaced by Obstacle class, check below
 class Pothole(sprite1):
    def __init__(self, screen, image, x, y, vx, vy):
       self.screen = screen
@@ -341,7 +341,7 @@ class Students(sprite1):
 
       self.rect = pygame.Rect(self.position.x + 30  , self.position.y, self.image.get_width() - 68, self.image.get_height())
       self.clip = pygame.Rect( 0, 0, 160, 180 )
-      self.images = [pygame.image.load('s1_new.png').convert_alpha(),pygame.image.load('s2_new.png').convert_alpha(),pygame.image.load('s3_new.png').convert_alpha(), pygame.image.load('s4_new.png').convert_alpha()]
+      self.images = [pygame.image.load('student1.png').convert_alpha(),pygame.image.load('student2.png').convert_alpha()]
       self.i = 0
 
 
@@ -395,7 +395,7 @@ class Powerup(sprite1):
 
       self.rect = pygame.Rect(self.position.x + 30  , self.position.y, self.image.get_width() - 68, self.image.get_height())
       self.clip = pygame.Rect( 0, 0, 160, 180 )
-      self.images = [pygame.image.load('coffee1.png').convert_alpha(),pygame.image.load('coffee2.png').convert_alpha(),pygame.image.load('coffee3.png').convert_alpha(), pygame.image.load('coffee4.png').convert_alpha()]
+      self.images = [pygame.image.load('coffee1.png').convert_alpha(),pygame.image.load('coffee2.png').convert_alpha(),pygame.image.load('coffee1.png').convert_alpha(), pygame.image.load('coffee3.png').convert_alpha()]
       self.i = 0
 
       
@@ -412,9 +412,11 @@ class Powerup(sprite1):
       
       # Simulates Falling/Walking down
       self.position.y = self.position.y + (self.velocity.y * self.accel)
-      if self.position.y >= self.screen.get_height() - self.image.get_height():
-         self.position.y = random.randrange(-382,0) # sprite appears in a random spot in the y-axis, occurs offscreen as to give space for its next iteration
-         self.position.x = random.randint(192, 832) # sprite appears in a random spot in the x-axis, along the walking pathway
+
+      # Commented this section so as powerup sprite would iterate as described in main.py
+      # if self.position.y >= self.screen.get_height() - self.image.get_height():
+      #    self.position.y = random.randrange(-382,0) # sprite appears in a random spot in the y-axis, occurs offscreen as to give space for its next iteration
+      #    self.position.x = random.randint(192, 832) # sprite appears in a random spot in the x-axis, along the walking pathway
 
       if self.position.y > 0 or self.position.y < 0:
          self.velocity.y = self.screen.get_height() - (self.image.get_height() / 2)
@@ -436,5 +438,53 @@ class Powerup(sprite1):
                #    return True
                return False
 
+# Obstacle test
+class Obstacle(sprite1):
+   def __init__(self, screen, image, x, y, vx, vy, accel):
+      self.screen = screen
+      self.image = pygame.image.load(image).convert()
+      self.image.set_colorkey((255,255,255))
+      self.position = vector2(x, y)
+      self.velocity = vector2(vx, vy)
+      self.rect = pygame.Rect(self.position.x, self.position.y, self.image.get_width(), self.image.get_height())
+      self.accel = accel # Determines the rate at which sprite falls down
+      self.previous = self.position
+      self.radius = self.image.get_width()
 
+      self.velocity.y = self.velocity.y + 5
+
+      self.rect = pygame.Rect(self.position.x + 30  , self.position.y, self.image.get_width() - 68, self.image.get_height())
+      
+   def update(self, delta):
+      self.rect.y = self.position.y
+      self.rect.x = self.position.x + 30
+     
+      # Simulates Falling/Walking down
+      self.position.y = self.position.y + (self.velocity.y * self.accel)
+
+      # Commented this section so as powerup sprite would iterate as described in main.py
+      # if self.position.y >= self.screen.get_height() - self.image.get_height():
+      #    self.position.y = random.randrange(-382,0) # sprite appears in a random spot in the y-axis, occurs offscreen as to give space for its next iteration
+      #    self.position.x = random.randint(192, (832 - self.image.get_width())) # sprite appears in a random spot in the x-axis, along the walking pathway
+
+      if self.position.y > 0 or self.position.y < 0:
+         self.velocity.y = self.screen.get_height() - (self.image.get_height() / 2)
+
+   def checkCollision(self, list, screen):
+      return True
+
+   def checkCollision(self, player, screen):
+        if (self.rect.colliderect(player.rect) and not player.jumping):
+               print "Obstacle Collission!"
+               player.level = player.level+10
+               player.position.y += 10
+               screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
+               if player.gameOver:
+                  return True
+              
+               # After Player touches the sprite, sprite 'dissapears'
+               # if (self.rect.y > player.rect.y):
+               #    self.position.y = self.screen.get_height()
+
+               return False
 

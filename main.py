@@ -30,7 +30,7 @@ pygame.mixer.music.load('song.mp3')
 screen = pygame.display.set_mode(background_size)
 
 # Player Image
-player = pygame.image.load('c1_new.png')
+player = pygame.image.load('player1.png')
 
 player_size = player.get_size()
 player_rect = player.get_rect()
@@ -115,9 +115,9 @@ def game_loop():
     time = pygame.time.get_ticks()
 
     list = [
-            Pothole(screen, "bench.png", 192, 50, 0, 0),
+            # Pothole(screen, "bench1.png", random.randint(192, 832), 50, 0, 0), # Could be replaced by Obstacle class, check sprite1.py
             Enemy( screen, "security1.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
-            Player( screen, "c2_new.png", sprite_position_x, sprite_position_y, 0, 1)
+            Player( screen, "player1.png", sprite_position_x, sprite_position_y, 0, 1)
            ]
 
     # while game has not been closed
@@ -163,13 +163,20 @@ def game_loop():
             y1 = -background_height
 
         if int(score) % 500 == 0:
-            student =  Students( screen, "s1_new.png", random.randint(192, 832), random.randint(0, 191), 0, 1, random.uniform(0.03, .01))
-            list.insert(1,student)
+            student =  Students( screen, "student1.png", random.randint(192, 832), random.randint(0, 191), 0, 1, random.uniform(0.03, .01))
+            list.insert(0,student)
 
         if int(score) % 900 == 0:
-            powerup =  Powerup( screen, "coffee4.png", random.randint(192, 832), random.randint(-382, 0), 0, 1, random.uniform(0.03, .01))
-            list.insert(0,powerup)
+            powerup =  Powerup( screen, "coffee1.png", random.randint(192, 832), random.randint(-382, 0), 0, 1, random.uniform(0.03, .01))
+            list.insert(1,powerup)
 
+        if int(score) % 100 == 0:            
+            bench1 =  Obstacle( screen, "bench1.png", random.randint(192, (832-281)), random.randint(-382, 0), 0, 1, 0.01)
+            list.insert(2,bench1)            
+        
+        if int(score) % 80 == 0:            
+            trash =  Obstacle( screen, "trash1.png", random.randint(192, (832-90)), random.randint(-382, 0), 0, 1, 0.01)
+            list.insert(2,trash)
 
         for obj in list:
             obj.update(time)
