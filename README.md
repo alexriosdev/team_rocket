@@ -8,12 +8,19 @@ For this particular demo the following files are needed:
   - main.py - (Main file) 
   - sprite1.py
   - utils.py
-  - background_update.png  
-  - c1-4_new.png (player sprites)
-  - e1-4_new.png (enemy sprites)
-  - s1-4_new.png (student sprites)
-  - pothole.png
+  - background_update.png
+  - Floor4.png
+  - player1-3.png (player sprites)
+  - security1-3.png (enemy sprites)
+  - student1-2.png (student sprites)
+  - coffee1-3.png (powerup sprites)
+  - trash1.png
+  - bench.png
+  - bench1.png  
   - song.mp3
+  - jump.wav
+  - bump.wav
+  - powerup.wav
 
 <!-- <h4>Reference Files</h4>
   - demo_play.py - (Old main file) 
@@ -53,6 +60,7 @@ For this particular demo the following files are needed:
   - Powerup respawns every 900 points
   - Obstacle class created so as to integrate new object sprites
   - Sound FX added
+  - Score system now displays previous player score
     
 <h4>To do:</h4>
   - Add sprite objects
