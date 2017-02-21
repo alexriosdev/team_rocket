@@ -50,11 +50,14 @@ For this particular demo the following files are needed:
   - Running animation added to enemy and student sprites
   - Powerup sprite added
   - Player moves up when touching a powerup sprite
+  - Powerup respawns every 900 points
+  - Obstacle class created so as to integrate new object sprites
+  - Sound FX added
     
 <h4>To do:</h4>
-  - Add sprite obstacles
-  - Get better looking sprites!
-  - Get sprite animations
+  - Add sprite objects
+  - Refine sprite animations
+  - Organize sprites and sound fx in folders
   
 <h4>Changes:</h4>
    - SPACEBAR is used to start the game so that users will already be set to jump when game starts
