@@ -131,6 +131,7 @@ def game_loop():
             message_to_screen("Game over, press Spacebar to play again or Escape key to quit", white,0)
             pygame.display.update()
             pygame.init()
+            hi_file_r.close() # End reading file
 
             for event in pygame.event.get():
                 if event.type == pygame.KEYDOWN:
@@ -139,7 +140,11 @@ def game_loop():
                         gameOver = False
 
                     if event.key  == pygame.K_SPACE:
+                        hi_file_w = open("highscore.txt","w")
+                        hi_file_w.write(str(score)) # Store highscore in file
+                        hi_file_w.close() # End writing file                        
                         game_loop()
+                        
                         
         # Exit Game by pressing the Escape Key            
         for event in pygame.event.get():
@@ -164,6 +169,8 @@ def game_loop():
         if y1 > background_height:
             y1 = -background_height
 
+
+        # Object Spawning and Spawning Interval
         if int(score) % 500 == 0:
             student =  Students( screen, "student1.png", random.randint(192, 832), random.randint(0, 191), 0, 1, random.uniform(0.03, .01))
             list.insert(0,student)
@@ -192,18 +199,21 @@ def game_loop():
 
         score = score + 1
 
+        # Display Current Score
         basicfont = pygame.font.SysFont(None, 48)
         text = basicfont.render("score: " + str(score) , True, (255, 255, 255))
         screen.blit(text, (8,4))
+
+        # Display Previous Score
+        hi_file_r = open("highscore.txt","r") # read file
+        text = basicfont.render("prev: " + hi_file_r.read(), True, (255, 255, 255))
+        screen.blit(text, (832,4))
+        hi_file_r.close() # close file
                     
         pygame.display.flip()
         pygame.display.update()
 
         #int(time * 4  / 1000))
-
-        
-          
-
 
         Clock.tick(FPS)
 
