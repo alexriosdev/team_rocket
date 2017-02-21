@@ -128,6 +128,11 @@ class Player(sprite1):
       elif controls[0] == 0 and controls[1] == 0 and controls[2] == 1 and self.jumping != True:
          self.jump()
 
+         # Sound Effects
+         self.soundfx = pygame.mixer.Sound("jump.wav")
+         self.soundfx.set_volume(.3)
+         self.soundfx.play()
+
       # The Code Below adds fluidity to the Jump:
 
       # Move Left + Jump
@@ -374,6 +379,12 @@ class Students(sprite1):
                player.level = player.level+10
                player.position.y += 10
                screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
+
+               # Sound Effects
+               self.soundfx = pygame.mixer.Sound("bump.wav")
+               self.soundfx.set_volume(.1)
+               self.soundfx.play()
+
                if player.gameOver:
                   return True
                return False
@@ -430,6 +441,11 @@ class Powerup(sprite1):
                player.level = player.level-10
                player.position.y -= 10
                screen.fill((0, 255, 0, 255), None, pygame.BLEND_RGBA_MULT)
+               
+               # Sound Effects
+               self.soundfx = pygame.mixer.Sound("powerup.wav")
+               self.soundfx.set_volume(.1)
+               self.soundfx.play()
 
                # After Player touches the powerup, powerup 'dissapears'
                if (self.rect.y > player.rect.y):
@@ -479,6 +495,12 @@ class Obstacle(sprite1):
                player.level = player.level+10
                player.position.y += 10
                screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
+               
+               # Sound Effects
+               self.soundfx = pygame.mixer.Sound("bump.wav")
+               self.soundfx.set_volume(.1)
+               self.soundfx.play()
+
                if player.gameOver:
                   return True
               

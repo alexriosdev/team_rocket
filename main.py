@@ -100,7 +100,9 @@ def game_intro():
 def game_loop():
     score = 0
 
-    #pygame.mixer.music.play(-1, 0)
+    # Background Music Volume
+    pygame.mixer.music.set_volume(.4)
+    pygame.mixer.music.play(-1, 0)
     
     # Variables
     gameExit = False
