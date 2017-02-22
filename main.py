@@ -177,14 +177,19 @@ def game_loop():
             powerup =  Powerup( screen, "Images/coffee1.png", random.randint(192, 832), random.randint(-382, 0), 0, 1, random.uniform(0.03, .01))
             list.insert(0,powerup)
 
-        if int(score) % 100 == 0:            
-            bench1 =  Obstacle( screen, "Images/bench1.png", random.randint(192, (832-281)), random.randint(-382, 0), 0, 1, 0.01)
-            list.insert(0,bench1)            
-        
-        if int(score) % 80 == 0:            
-            trash =  Obstacle( screen, "Images/trash1.png", random.randint(192, (832-90)), random.randint(-382, 0), 0, 1, 0.01)
+        # Default y-interval for objects was random.randint(-381,0)
+        if int(score) % 79 == 0:            
+            trash =  Obstacle( screen, "Images/trash1.png", random.randint(192, (832-90)), random.randint(-191, 0), 0, 1, 0.01)
             list.insert(0,trash)
-        
+
+        if int(score) % 113 == 0:            
+            bench1 =  Obstacle( screen, "Images/bench1.png", random.randint(192, (832-281)), random.randint(-382, -191), 0, 1, 0.01)
+            list.insert(0,bench1)
+
+        if int(score) % 187 == 0:            
+            bench2 =  Obstacle( screen, "Images/long_bench.png", random.randint(192, (832-596)), random.randint(-764, -382), 0, 1, 0.01)
+            list.insert(0,bench2)          
+
         for obj in list:
             obj.update(time)
             time = pygame.time.get_ticks() * .25
