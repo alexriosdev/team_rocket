@@ -117,7 +117,6 @@ def game_loop():
     time = pygame.time.get_ticks()
 
     list = [
-            # Pothole(screen, "bench1.png", random.randint(192, 832), 50, 0, 0), # Could be replaced by Obstacle class, check sprite1.py
             Enemy( screen, "security1.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
             Player( screen, "player1.png", sprite_position_x, sprite_position_y, 0, 1)
            ]
@@ -169,7 +168,6 @@ def game_loop():
         if y1 > background_height:
             y1 = -background_height
 
-
         # Object Spawning and Spawning Interval
         if int(score) % 500 == 0:
             student =  Students( screen, "student1.png", random.randint(192, 832), random.randint(0, 191), 0, 1, random.uniform(0.03, .01))
@@ -177,23 +175,27 @@ def game_loop():
 
         if int(score) % 900 == 0:
             powerup =  Powerup( screen, "coffee1.png", random.randint(192, 832), random.randint(-382, 0), 0, 1, random.uniform(0.03, .01))
-            list.insert(1,powerup)
+            list.insert(0,powerup)
 
         if int(score) % 100 == 0:            
             bench1 =  Obstacle( screen, "bench1.png", random.randint(192, (832-281)), random.randint(-382, 0), 0, 1, 0.01)
-            list.insert(2,bench1)            
+            list.insert(0,bench1)            
         
         if int(score) % 80 == 0:            
             trash =  Obstacle( screen, "trash1.png", random.randint(192, (832-90)), random.randint(-382, 0), 0, 1, 0.01)
-            list.insert(2,trash)
-
+            list.insert(0,trash)
+        
         for obj in list:
             obj.update(time)
             time = pygame.time.get_ticks() * .25
-           
+            
         gameOver = obj.checkCollision(list, screen)
-        
-        
+
+        # Get Coordinates for Enemy Sprite
+        coordinates = obj.position
+        list[-2].updateCoordinates(coordinates)
+      
+        # Draw objects in list
         for obj in list:
             obj.draw(screen)
 
