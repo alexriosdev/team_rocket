@@ -80,7 +80,7 @@ class Player(sprite1):
       self.jumping = False
       self.level = self.position.y
       self.gameOver = False
-      self.images = [pygame.image.load('player1.png').convert_alpha(),pygame.image.load('player2.png').convert_alpha(),pygame.image.load('player1.png').convert_alpha(), pygame.image.load('player3.png').convert_alpha()]
+      self.images = [pygame.image.load('Images/player1.png').convert_alpha(),pygame.image.load('Images/player2.png').convert_alpha(),pygame.image.load('Images/player1.png').convert_alpha(), pygame.image.load('Images/player3.png').convert_alpha()]
       self.i = 0
 
    def getPlayerInput(self):
@@ -129,7 +129,7 @@ class Player(sprite1):
          self.jump()
 
          # Sound Effects
-         self.soundfx = pygame.mixer.Sound("jump.wav")
+         self.soundfx = pygame.mixer.Sound("Sounds/jump.wav")
          self.soundfx.set_volume(.3)
          self.soundfx.play()
 
@@ -205,7 +205,7 @@ class Enemy(sprite1):
 
       self.rect = pygame.Rect(self.position.x + 15, self.position.y + 15, self.image.get_width() - 70, self.image.get_height()-50)
       self.clip = pygame.Rect( 0, 0, 160, 180 )
-      self.images = [pygame.image.load('security1.png').convert_alpha(),pygame.image.load('security2.png').convert_alpha(),pygame.image.load('security1.png').convert_alpha(),pygame.image.load('security3.png').convert_alpha()]
+      self.images = [pygame.image.load('Images/security1.png').convert_alpha(),pygame.image.load('Images/security2.png').convert_alpha(),pygame.image.load('Images/security1.png').convert_alpha(),pygame.image.load('Images/security3.png').convert_alpha()]
       self.i = 0
   
    def getPlayerInput(self):
@@ -300,7 +300,7 @@ class Students(sprite1):
 
       self.rect = pygame.Rect(self.position.x + 30  , self.position.y, self.image.get_width() - 68, self.image.get_height())
       self.clip = pygame.Rect( 0, 0, 160, 180 )
-      self.images = [pygame.image.load('student1.png').convert_alpha(),pygame.image.load('student2.png').convert_alpha()]
+      self.images = [pygame.image.load('Images/student1.png').convert_alpha(),pygame.image.load('Images/student2.png').convert_alpha()]
       self.i = 0
 
    def draw(self, screen):
@@ -334,7 +334,7 @@ class Students(sprite1):
                screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
 
                # Sound Effects
-               self.soundfx = pygame.mixer.Sound("bump.wav")
+               self.soundfx = pygame.mixer.Sound("Sounds/bump.wav")
                self.soundfx.set_volume(.1)
                self.soundfx.play()
 
@@ -359,7 +359,7 @@ class Powerup(sprite1):
 
       self.rect = pygame.Rect(self.position.x + 30  , self.position.y, self.image.get_width() - 68, self.image.get_height())
       self.clip = pygame.Rect( 0, 0, 160, 180 )
-      self.images = [pygame.image.load('coffee1.png').convert_alpha(),pygame.image.load('coffee2.png').convert_alpha(),pygame.image.load('coffee1.png').convert_alpha(), pygame.image.load('coffee3.png').convert_alpha()]
+      self.images = [pygame.image.load('Images/coffee1.png').convert_alpha(),pygame.image.load('Images/coffee2.png').convert_alpha(),pygame.image.load('Images/coffee1.png').convert_alpha(), pygame.image.load('Images/coffee3.png').convert_alpha()]
       self.i = 0
       
    def draw(self, screen):
@@ -395,7 +395,7 @@ class Powerup(sprite1):
                screen.fill((0, 255, 0, 255), None, pygame.BLEND_RGBA_MULT)
                
                # Sound Effects
-               self.soundfx = pygame.mixer.Sound("powerup.wav")
+               self.soundfx = pygame.mixer.Sound("Sounds/powerup.wav")
                self.soundfx.set_volume(.1)
                self.soundfx.play()
 
@@ -448,7 +448,7 @@ class Obstacle(sprite1):
                screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
                
                # Sound Effects
-               self.soundfx = pygame.mixer.Sound("bump.wav")
+               self.soundfx = pygame.mixer.Sound("Sounds/bump.wav")
                self.soundfx.set_volume(.1)
                self.soundfx.play()
 

@@ -18,19 +18,19 @@ Clock = pygame.time.Clock()
 FPS = 60
 
 # Background Image
-background = pygame.image.load('background_update.png')
+background = pygame.image.load('Images/background_update.png')
 
 background_size = background.get_size()
 background_rect = background.get_rect()
 
 # Background Music
-pygame.mixer.music.load('song.mp3')
+pygame.mixer.music.load('Sounds/song.mp3')
 
 # Set screen to background dimentions
 screen = pygame.display.set_mode(background_size)
 
 # Player Image
-player = pygame.image.load('player1.png')
+player = pygame.image.load('Images/player1.png')
 
 player_size = player.get_size()
 player_rect = player.get_rect()
@@ -57,7 +57,7 @@ sprite_position_y = sprite_position_x      # Place sprite a couple of pixels abo
 sprite_pos_enemy = 0.2 
 sprite_pos_player = 1.5
 
-enemy = pygame.image.load('security1.png')
+enemy = pygame.image.load('Images/security1.png')
 enemy_sprite_position_y = background_height - (player_height * sprite_pos_enemy) 
 
 font = pygame.font.SysFont(None, 25)
@@ -117,8 +117,8 @@ def game_loop():
     time = pygame.time.get_ticks()
 
     list = [
-            Enemy( screen, "security1.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
-            Player( screen, "player1.png", sprite_position_x, sprite_position_y, 0, 1)
+            Enemy( screen, "Images/security1.png", sprite_position_x, enemy_sprite_position_y, 0, 1),
+            Player( screen, "Images/player1.png", sprite_position_x, sprite_position_y, 0, 1)
            ]
 
     # while game has not been closed
@@ -170,19 +170,19 @@ def game_loop():
 
         # Object Spawning and Spawning Interval
         if int(score) % 500 == 0:
-            student =  Students( screen, "student1.png", random.randint(192, 832), random.randint(0, 191), 0, 1, random.uniform(0.03, .01))
+            student =  Students( screen, "Images/student1.png", random.randint(192, 832), random.randint(0, 191), 0, 1, random.uniform(0.03, .01))
             list.insert(0,student)
 
         if int(score) % 900 == 0:
-            powerup =  Powerup( screen, "coffee1.png", random.randint(192, 832), random.randint(-382, 0), 0, 1, random.uniform(0.03, .01))
+            powerup =  Powerup( screen, "Images/coffee1.png", random.randint(192, 832), random.randint(-382, 0), 0, 1, random.uniform(0.03, .01))
             list.insert(0,powerup)
 
         if int(score) % 100 == 0:            
-            bench1 =  Obstacle( screen, "bench1.png", random.randint(192, (832-281)), random.randint(-382, 0), 0, 1, 0.01)
+            bench1 =  Obstacle( screen, "Images/bench1.png", random.randint(192, (832-281)), random.randint(-382, 0), 0, 1, 0.01)
             list.insert(0,bench1)            
         
         if int(score) % 80 == 0:            
-            trash =  Obstacle( screen, "trash1.png", random.randint(192, (832-90)), random.randint(-382, 0), 0, 1, 0.01)
+            trash =  Obstacle( screen, "Images/trash1.png", random.randint(192, (832-90)), random.randint(-382, 0), 0, 1, 0.01)
             list.insert(0,trash)
         
         for obj in list:
