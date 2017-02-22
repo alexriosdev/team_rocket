@@ -62,11 +62,11 @@ For this particular demo the following files are needed:
   - Sound FX added
   - Score system now displays previous player score
   - Movement delay for enemy sprite added
+  - Image sprites and sound fx organized in folders
     
 <h4>To do:</h4>
   - Add sprite objects
   - Refine sprite animations
-  - Organize sprites and sound fx in folders
   
 <h4>Changes:</h4>
    - SPACEBAR is used to start the game so that users will already be set to jump when game starts
