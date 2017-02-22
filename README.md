@@ -61,6 +61,7 @@ For this particular demo the following files are needed:
   - Obstacle class created so as to integrate new object sprites
   - Sound FX added
   - Score system now displays previous player score
+  - Movement delay for enemy sprite added
     
 <h4>To do:</h4>
   - Add sprite objects
