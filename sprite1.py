@@ -97,10 +97,21 @@ class Player(sprite1):
       self.level += .01
 
    def draw(self, screen):
-      screen.set_colorkey((0,0,0))
-      screen.blit( self.image, (self.position.x, self.position.y))
+      screen.set_colorkey((0,0,0))      
       if not self.jumping:
          self.image = self.images[int(self.i)]
+         screen.blit( self.image, (self.position.x, self.position.y))
+
+      # Shadow test
+      if self.jumping:      
+         if int(self.i) == 0:
+            screen.blit(pygame.image.load('Images/player_shadow1.png').convert_alpha(),(self.position.x, self.position.y))
+         if int(self.i) == 1:
+            screen.blit(pygame.image.load('Images/player_shadow2.png').convert_alpha(),(self.position.x, self.position.y))
+         if int(self.i) == 2:
+            screen.blit(pygame.image.load('Images/player_shadow1.png').convert_alpha(),(self.position.x, self.position.y))
+         if int(self.i) == 3:
+            screen.blit(pygame.image.load('Images/player_shadow3.png').convert_alpha(),(self.position.x, self.position.y))
 
    def update(self, delta):
       print
@@ -191,7 +202,7 @@ class Player(sprite1):
                self.level = self.level + 1
             return self.gameOver
 
-# Enemy only mimics player movements
+# Enemy follows player's path with a delay
 class Enemy(sprite1):
    def __init__(self, screen, image, x,y, vx,vy):
       self.screen = screen
