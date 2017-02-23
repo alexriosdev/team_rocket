@@ -65,6 +65,7 @@ For this particular demo the following files are needed:
   - Score system now displays previous player score
   - Movement delay for enemy sprite added
   - Image sprites and sound fx organized in folders
+  - Player sprite now has shadow when jumping
     
 <h4>To do:</h4>
   - Add sprite objects
