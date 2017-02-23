@@ -187,9 +187,13 @@ def game_loop():
             list.insert(0,bench1)
 
         if int(score) % 187 == 0:            
-            bench2 =  Obstacle( screen, "Images/long_bench.png", random.randint(192, (832-596)), random.randint(-764, -382), 0, 1, 0.01)
-            list.insert(0,bench2)          
-
+            bench2 =  Obstacle( screen, "Images/bench3.png", random.randint(192, (832-562)), random.randint(-764, -382), 0, 1, 0.01)
+            list.insert(0,bench2)
+            
+        if int(score) % 223 == 0:            
+            bench3 =  Obstacle( screen, "Images/bench4.png", random.randint(0, (1024-843)), random.randint(-764, -382), 0, 1, 0.01)
+            list.insert(0,bench3)
+            
         for obj in list:
             obj.update(time)
             time = pygame.time.get_ticks() * .25
