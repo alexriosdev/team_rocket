@@ -51,12 +51,12 @@ class sprite1:
        pygame.draw.circle(screen, (255,0,0), (int(self.position.x)+self.image.get_width()/2, int(self.position.y)), self.image.get_height() / 2, 4)
 
    def checkCollision(self, list, screen):
-      print self.radius, 1
+      #print self.radius, 1
       for obj in list:
          if self != obj:
             collision = obj.position.subtract(self.position)
             if collision.magnitude() <= obj.radius:
-               print collision.magnitude(), obj.radius, "collision"
+               #print collision.magnitude(), obj.radius, "collision"
                obj.position.subtract(collision)
                self.position.subtract(collision.normalized().scale(self.radius*2 - collision.magnitude()))
                obj.collide(screen)         
@@ -128,12 +128,12 @@ class Player(sprite1):
       # Move Left
       if controls[0] == 1 and controls[1] == 0 and controls[2] == 0 and self.jumping != True:
          self.position.x = self.position.x - dist
-         print self.position.x
+         #print self.position.x
       
       # Move Right
       elif controls[0] == 0 and controls[1] == 1 and controls[2] == 0 and self.jumping != True:
          self.position.x = self.position.x + dist
-         print self.position.x
+         #print self.position.x
 
       # Jump
       elif controls[0] == 0 and controls[1] == 0 and controls[2] == 1 and self.jumping != True:
@@ -167,7 +167,7 @@ class Player(sprite1):
       # Update physics
       if self.jumping:
          self.position = self.position.add(self.velocity.scale((pygame.time.get_ticks()* .25) - delta ))
-         print self.position
+         #print self.position
          self.velocity.y = self.velocity.y + self.accel
          if self.position.y >= self.level:
             self.velocity.y = 0
@@ -176,7 +176,7 @@ class Player(sprite1):
             
       # Keep sprite in boundaries
       if self.position.y >= self.screen.get_height() - self.image.get_width()/2:
-         print "GAME OVER"
+         #print "GAME OVER"
          self.gameOver = True
 
       if self.position.y <= 0 :          
@@ -197,7 +197,7 @@ class Player(sprite1):
 
          else:
             if (self.position.x <= 118 or self.position.x >= 778) and not self.jumping:
-               print "out of bounds"
+               #print "out of bounds"
                self.position.y = self.position.y + 1
                self.level = self.level + 1
             return self.gameOver
@@ -237,7 +237,7 @@ class Enemy(sprite1):
          self.image = self.images[int(self.i)]
 
    def updateCoordinates(self, coordinates):
-      # print self.coordinates, "enemy"
+      # #print self.coordinates, "enemy"
       self.coordinates.append(coordinates)
       
    def update(self, delta):
@@ -286,7 +286,7 @@ class Pothole(sprite1):
 
    def checkCollision(self, player, screen):
         if (self.rect.colliderect(player.rect) and not player.jumping):
-               print "colission", self.rect.x, player.rect.x
+               #print "colission", self.rect.x, player.rect.x
                player.level = player.level+10
                player.position.y += 10
                screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
@@ -339,7 +339,7 @@ class Students(sprite1):
    
    def checkCollision(self, player, screen):
          if (self.rect.colliderect(player.rect)):
-               print "student colission"
+               #print "student colission"
                player.level = player.level+10
                player.position.y += 10
                screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)
@@ -400,7 +400,7 @@ class Powerup(sprite1):
 
    def checkCollision(self, player, screen):
         if (self.rect.colliderect(player.rect) and not player.jumping):
-               print "POWERUP!", self.rect.x, player.rect.x
+               #print "POWERUP!", self.rect.x, player.rect.x
                player.level = player.level-10
                player.position.y -= 10
                screen.fill((0, 255, 0, 255), None, pygame.BLEND_RGBA_MULT)
@@ -453,7 +453,7 @@ class Obstacle(sprite1):
 
    def checkCollision(self, player, screen):
         if (self.rect.colliderect(player.rect) and not player.jumping):
-               print "Obstacle Collission!"
+               #print "Obstacle Collission!"
                player.level = player.level+10
                player.position.y += 10
                screen.fill((0, 0, 0, 255), None, pygame.BLEND_RGBA_MULT)

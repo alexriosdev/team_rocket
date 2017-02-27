@@ -5,7 +5,7 @@ from utils import vector2
 from sprite1 import *
 
 pygame.init()
-pygame.display.set_caption( "Run Bronco Run!" ) #Placeholder name
+pygame.display.set_caption( "Vaquero On The Run!" )
 
 # Colors
 black = 0,0,0
@@ -87,7 +87,7 @@ def game_intro():
                     quit()
                     
         screen.fill(black)        
-        message_to_screen("Welcome",white,-95.5)
+        message_to_screen("Welcome to Vaquero On The Run!",white,-95.5)
         message_to_screen("The objective of this game is to escape the law",white,-50)
         message_to_screen("Use A to move left, D to move right",white,0)
         message_to_screen("Use Spacebar to jump",white,50)
@@ -126,8 +126,11 @@ def game_loop():
         # when player has been caught (work in progress)
         while gameOver == True:
             screen.fill(black)
-            message_to_screen("SCORE: " + str(score), white, -40)
-            message_to_screen("Game over, press Spacebar to play again or Escape key to quit", white,0)
+            message_to_screen("SCORE: " + str(score), white, -95.5)
+            message_to_screen("The objective of this game is to escape the law",white,-50)
+            message_to_screen("Use A to move left, D to move right",white,0)
+            message_to_screen("Use Spacebar to jump",white,50)
+            message_to_screen("Press Spacebar to continue, Q to quit",white,95.5)
             pygame.display.update()
             pygame.init()
             hi_file_r.close() # End reading file
