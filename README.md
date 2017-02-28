@@ -78,7 +78,6 @@ For this particular demo the following files are included:
   - Player sprite now has shadow when jumping
     
 <h4>To do:</h4>
-  - Add sprite objects
   - Refine sprite animations
   
 <h4>Changes:</h4>
