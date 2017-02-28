@@ -1,10 +1,20 @@
 # team_rocket
 <b>Repository for Game Dev Class</b><br>
 
-This repo contains the necessary files for the demo project due on February 9, 2017 <br>
+This repo contains the necessary files for the Game Showcase project on February 23, 2017 <br>
 
+<h4>How to run the game</h4> 
+  - Make sure to have Python 2.7 and Pygame installed
+  - Make sure to have the following included in the game folder:
+    - main.py
+    - sprite1.py
+    - utils.py
+    - Images folder
+    - Sounds folder
+  - Run main.py on Python 2.7 and enjoy!
+  
 <h3>Notes:</h3>
-For this particular demo the following files are needed:
+For this particular demo the following files are included:
   - main.py - (Main file) 
   - sprite1.py
   - utils.py
